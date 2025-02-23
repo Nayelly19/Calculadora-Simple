@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simple</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .calculadora {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .pantalla {
+            width: 100%;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .botones {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .botones button {
+            padding: 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .botones button:hover {
+            background-color: #0056b3;
+        }
+
+        .botones button.operador {
+            background-color: #ff9500;
+        }
+
+        .botones button.operador:hover {
+            background-color: #e08900;
+        }
+
+        .botones button.igual {
+            background-color: #28a745;
+            grid-column: span 2;
+        }
+
+        .botones button.igual:hover {
+            background-color: #218838;
+        }
+
+        .botones button.limpiar {
+            background-color: #dc3545;
+            grid-column: span 2;
+        }
+
+        .botones button.limpiar:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculadora">
+        <input type="text" id="pantalla" class="pantalla" disabled>
+        <div class="botones">
+            <button onclick="agregarNumero('7')">7</button>
+            <button onclick="agregarNumero('8')">8</button>
+            <button onclick="agregarNumero('9')">9</button>
+            <button class="operador" onclick="agregarOperador('/')">/</button>
+            <button onclick="agregarNumero('4')">4</button>
+            <button onclick="agregarNumero('5')">5</button>
+            <button onclick="agregarNumero('6')">6</button>
+            <button class="operador" onclick="agregarOperador('*')">*</button>
+            <button onclick="agregarNumero('1')">1</button>
+            <button onclick="agregarNumero('2')">2</button>
+            <button onclick="agregarNumero('3')">3</button>
+            <button class="operador" onclick="agregarOperador('-')">-</button>
+            <button onclick="agregarNumero('0')">0</button>
+            <button onclick="agregarNumero('.')">.</button>
+            <button class="igual" onclick="calcular()">=</button>
+            <button class="operador" onclick="agregarOperador('+')">+</button>
+            <button class="limpiar" onclick="limpiarPantalla()">C</button>
+        </div>
+    </div>
+
+    <script>
+        // Función para agregar números o el punto decimal a la pantalla
+        function agregarNumero(numero) {
+            const pantalla = document.getElementById('pantalla');
+            pantalla.value += numero;
+        }
+
+        // Función para agregar operadores a la pantalla
+        function agregarOperador(operador) {
+            const pantalla = document.getElementById('pantalla');
+            pantalla.value += operador;
+        }
+
+        // Función para calcular el resultado
+        function calcular() {
+            const pantalla = document.getElementById('pantalla');
+            try {
+                // Evaluar la expresión matemática
+                pantalla.value = eval(pantalla.value);
+            } catch (error) {
+                // Mostrar "Error" si la expresión es inválida
+                pantalla.value = "Error";
+            }
+        }
+
+        // Función para limpiar la pantalla
+        function limpiarPantalla() {
+            const pantalla = document.getElementById('pantalla');
+            pantalla.value = "";
+        }
+    </script>
+</body>
+</html>
